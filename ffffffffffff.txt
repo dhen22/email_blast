@@ -1,0 +1,32 @@
+<?php
+$file = fopen("FILE_CSV.csv","r");
+$data = array();
+while($row = fgetcsv($file)) {
+   $data[] = $row; //Get all the data
+}
+if($data){
+    $n_columns = count($data[0]); //Get number of columns
+}
+echo '<table border="1">';
+for ($col = 0; $col < $n_columns; $col++) {
+    echo '<tr>';
+    foreach ($data as $row_k => $row) {
+        if ($row_k == 0) {
+            echo '<th>';
+        } else {
+            echo '<td>';
+        }
+
+        echo $row[$col] ?? '';
+        if ($row_k == 0) {
+            echo '</th>';
+        } else {
+            echo '</td>';
+        }
+    }
+    echo '</tr>';
+}
+echo '</table>';
+
+fclose($file);
+?>
